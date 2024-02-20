@@ -7,6 +7,7 @@ RUN echo "Current path: $PATH"
 
 RUN ls -a
 
+RUN pwd
 # Bundle app source
 COPY . .
 
