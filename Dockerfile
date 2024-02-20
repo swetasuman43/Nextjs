@@ -2,7 +2,7 @@ FROM node:19.0.1-alpine
 
 
 
-RUN npm install express 
+RUN npm install  
 
 
 
