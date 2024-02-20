@@ -8,6 +8,10 @@ RUN echo "Current path: $PATH"
 RUN ls -a
 
 RUN pwd
+
+Run cd /var/lib/jenkins/workspace/node2/
+
+RUN ls -a
 # Bundle app source
 COPY . .
 
