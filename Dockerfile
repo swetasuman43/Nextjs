@@ -1,6 +1,11 @@
 FROM node:19.0.1-alpine
 
 
+
+RUN npm install express 
+
+
+
 # Bundle app source
 COPY . .
 
