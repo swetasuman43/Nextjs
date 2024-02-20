@@ -1,0 +1,47 @@
+    pipeline {
+        
+        agent any 
+        
+        environment {
+            IMAGE_TAG = "${BUILD_NUMBER}"
+        }
+        
+        stages {
+            
+            stage('Checkout'){
+            steps {
+                    git credentialsId: '0c75a505-8ae5-48ec-ba32-e97e52a355d5', 
+                    url: 'https://github.com/phaneendra-github/sample-nextjs',
+                    branch: 'feature/1'
+            }
+            }
+
+            stage('Build Docker'){
+                steps{
+                    script{
+                        sh '''
+                        echo 'Buid Docker Image'
+                        pwd
+                        docker build -t node/app:${BUILD_NUMBER} .
+                        '''
+                    }
+                }
+            }
+
+            stage('Push the image'){
+            steps{
+                    script{
+                        
+                            sh '''                                                                    
+                            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 353700960133.dkr.ecr.us-east-1.amazonaws.com
+                            aws ecr create-repository  --repository-name my-ecr-repo --region us-east-1
+                            docker tag node/app:${BUILD_NUMBER} 353700960133.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:v${BUILD_NUMBER}
+                            docker push 353700960133.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:v${BUILD_NUMBER}
+                            '''
+                        
+                    }
+                }
+            }     
+                
+        }
+    }
