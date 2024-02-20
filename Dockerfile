@@ -1,15 +1,13 @@
 FROM node:19.0.1-alpine
 
+WORKDIR /dev
 
-
-
-RUN echo "Current path: $PATH"
+COPY  . /dev
 
 RUN ls -a
 
 RUN pwd
 
-Run cd /var/lib/jenkins/workspace/node2/
 
 RUN ls -a
 # Bundle app source
