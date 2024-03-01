@@ -22,7 +22,6 @@
                         sh '''
                         echo 'Buid Docker Image'
                         pwd
-			usermod -aG docker ec2-user
                         docker build -t HH-UI-nodejs:${BUILD_NUMBER} .
                         '''
                     }
