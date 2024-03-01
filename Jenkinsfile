@@ -22,7 +22,8 @@
                         sh '''
                         echo 'Buid Docker Image'
                         pwd
-                        docker build -t node/app:${BUILD_NUMBER} .
+			usermod -aG docker ec2-user
+                        docker build -t HH-UI-nodejs:${BUILD_NUMBER} .
                         '''
                     }
                 }
@@ -34,8 +35,7 @@
                         
                             sh '''                                                                    
                             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 353700960133.dkr.ecr.us-east-1.amazonaws.com
-                            aws ecr create-repository  --repository-name my-ecr-repo --region us-east-1
-                            docker tag node/app:${BUILD_NUMBER} 353700960133.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:v${BUILD_NUMBER}
+                            docker tag HH-UI-nodejs:${BUILD_NUMBER} 353700960133.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:v${BUILD_NUMBER}
                             docker push 353700960133.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:v${BUILD_NUMBER}
                             '''
                         
