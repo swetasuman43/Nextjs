@@ -8,4 +8,4 @@ app.get('/', async (request, response) => {
 
 });
 
-app.listen(process.env.PORT || 3000, () => console.log(`App available on http://localhost:3000`))
+app.listen(process.env.PORT || 3000, () => console.log(`App available on http://3.82.93.252:3000`))
